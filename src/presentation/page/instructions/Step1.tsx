@@ -21,7 +21,9 @@ const Step1: React.FC<ownProps> = props => {
         você faria para obter o ponto de ataque?”
       </Descriptions>
       <Footer>
-        <Button onClick={props.onClick}>Continuar</Button>
+        <Button onClick={props.onClick} autoFocus>
+          Continuar
+        </Button>
       </Footer>
     </Container>
   );

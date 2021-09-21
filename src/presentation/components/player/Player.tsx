@@ -39,7 +39,7 @@ const Player: React.FC<ownProps> = ({ playlist }): JSX.Element => {
       height="700px"
       width="100%"
       id="video"
-      playing={running}
+      playing
       controls={false}
       progressInterval={1000}
       onProgress={(e: videoProgress) => {

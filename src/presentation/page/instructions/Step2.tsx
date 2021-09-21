@@ -30,7 +30,9 @@ const Step2: React.FC<ownProps> = props => {
         <img alt="intruction2" src={intruction2} />
       </Photo>
       <Footer>
-        <Button onClick={props.onClick}>Continuar</Button>
+        <Button onClick={props.onClick} autoFocus>
+          Continuar
+        </Button>
       </Footer>
     </Container>
   );

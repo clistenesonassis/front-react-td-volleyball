@@ -35,7 +35,9 @@ const Step3: React.FC<ownProps> = props => {
         uma tecla.
       </Warning>
       <Footer>
-        <Button onClick={props.onClick}>Iniciar teste</Button>
+        <Button onClick={props.onClick} autoFocus>
+          Iniciar teste
+        </Button>
       </Footer>
     </Container>
   );

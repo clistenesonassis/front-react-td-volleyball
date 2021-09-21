@@ -63,4 +63,24 @@ export class CalcResult {
       this.result.length
     ).toFixed(2);
   }
+
+  public averageResponseTime = (): string => {
+    let timeToResponse = 0;
+
+    this.result.forEach(e => {
+      timeToResponse += e.timeToResponse;
+    });
+
+    return (timeToResponse / this.result.length).toFixed(0);
+  };
+
+  public totalTime = (): string => {
+    let timeToResponse = 0;
+
+    this.result.forEach(e => {
+      timeToResponse += e.timeToResponse;
+    });
+
+    return (timeToResponse / 1000).toFixed(0);
+  };
 }
