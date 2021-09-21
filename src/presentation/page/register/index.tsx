@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
+import moment from 'moment';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { Select } from '../../components/select';
@@ -9,7 +10,7 @@ import { Button } from '../../components/common/button';
 
 const Register: React.FC<RouteComponentProps> = (props): JSX.Element => {
   const [user, setUser] = useState({
-    birth_date: '',
+    birth_date: moment(new Date()).format('YYYY-MM-DD'),
     city: '',
     competitive_level: '',
     competitive_profile: '',
@@ -32,6 +33,21 @@ const Register: React.FC<RouteComponentProps> = (props): JSX.Element => {
     {
       value: 'female',
       label: 'Feminino',
+    },
+  ];
+
+  const hand = [
+    {
+      value: 'destro',
+      label: 'Destro',
+    },
+    {
+      value: 'canhoto',
+      label: 'Canhoto',
+    },
+    {
+      value: 'ambidestro',
+      label: 'Ambidestro',
     },
   ];
 
@@ -119,6 +135,7 @@ const Register: React.FC<RouteComponentProps> = (props): JSX.Element => {
             label="Data de nascimento"
             type="date"
             fullWidth
+            InputLabelProps={{ shrink: true }}
             value={user.birth_date}
             onChange={e => setUser({ ...user, birth_date: e.target.value })}
           />
@@ -130,9 +147,10 @@ const Register: React.FC<RouteComponentProps> = (props): JSX.Element => {
           <Select itens={gender} label="Sexo*" />
         </Group>
 
-        <Group>
+        <Group quant={['1fr', '0.7fr', '0.5fr']}>
           <TextField id="standard-basic" label="Cidade" fullWidth />
           <TextField id="standard-basic" label="Estado" fullWidth />
+          <Select itens={hand} label="Mão dominate*" />
         </Group>
 
         <Group quant={['1fr', '1fr', '1fr']}>
