@@ -119,6 +119,10 @@ const Register: React.FC<RouteComponentProps> = (props): JSX.Element => {
     },
   ];
 
+  const test = () => {
+    // props.history.push('/instructions');
+  };
+
   return (
     <Container>
       <Form>
@@ -179,9 +183,7 @@ const Register: React.FC<RouteComponentProps> = (props): JSX.Element => {
       </Form>
 
       <Footer>
-        <Button onClick={() => props.history.push('/instructions')}>
-          Cadastre-se
-        </Button>
+        <Button onClick={test}>Cadastre-se</Button>
       </Footer>
     </Container>
   );

@@ -4,4 +4,5 @@ export interface iReducer {
   counterdown?: boolean;
   currentVideo?: number;
   score?: number;
+  end?: boolean;
 }

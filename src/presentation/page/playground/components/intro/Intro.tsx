@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Container } from './styles/Intro';
+import { Container } from './styles';
 
 interface iProps {
   start: () => any;

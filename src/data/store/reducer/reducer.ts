@@ -8,6 +8,7 @@ export const initialState: iReducer = {
   counterdown: true,
   currentVideo: 0,
   score: 0,
+  end: false,
 };
 
 const reducer = (state = initialState, action: ReducerActions): iReducer => {
