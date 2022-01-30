@@ -1,7 +1,8 @@
 export default {
-  primary: '#231942',
-  primaryLight: '#5e548e',
+  primary: '#ffffff',
+  primaryLight: '#d1d1d1',
   neutral: '#9f86c0',
-  secundary: 'be95c4',
+  secundary: '#be95c4',
   secundaryLight: '#e0b1cb',
+  background: '#000000',
 };

@@ -6,7 +6,10 @@ import {
   Register,
   Home,
   Playground,
-  Result,
+  Dashboard,
+  Adm,
+  Exam,
+  Teste,
 } from '../presentation/page';
 
 const Routes = (): JSX.Element => (
@@ -16,7 +19,10 @@ const Routes = (): JSX.Element => (
       <Route path="/instructions" component={Instructions} />
       <Route path="/playground" component={Playground} />
       <Route path="/register" component={Register} />
-      <Route path="/result" component={Result} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/adm" component={Adm} />
+      <Route path="/exam" component={Exam} />
+      <Route path="/test" component={Teste} />
     </Switch>
   </BrowserRouter>
 );

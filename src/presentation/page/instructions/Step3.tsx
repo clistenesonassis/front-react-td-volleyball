@@ -11,7 +11,7 @@ import {
   Photo,
   Warning,
   Footer,
-} from './styles/StyledStep3';
+} from './step3.styles';
 
 interface ownProps {
   onClick?: () => any;
@@ -19,7 +19,7 @@ interface ownProps {
 
 const Step3: React.FC<ownProps> = props => {
   return (
-    <Container>
+    <Container className="container">
       <Title>Instruções para o Teste</Title>
       <Descriptions>
         O teste dura aproximadamente 15 minutos e deve ser realizado completo

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,11 +33,4 @@ export const Footer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-`;
-
-export const Warning = styled.div`
-  max-width: 800px;
-  text-align: center;
-  margin: 15px 0px;
-  color: red;
 `;

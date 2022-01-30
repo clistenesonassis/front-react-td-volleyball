@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '../../components/common/button';
 
-import { Container, Title, Descriptions, Footer } from './styles/StyledStep1';
+import { Container, Title, Descriptions, Footer } from './step1.styles';
 
 interface ownProps {
   onClick?: () => any;

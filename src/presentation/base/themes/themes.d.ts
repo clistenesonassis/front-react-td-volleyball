@@ -7,5 +7,6 @@ declare module 'styled-components' {
     neutral: string;
     secundary: string;
     secundaryLight: string;
+    background: string;
   }
 }

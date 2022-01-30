@@ -6,9 +6,7 @@ import {
 } from '../protocols/localstore/firebase/store';
 
 export class UserRepository {
-  private db: firebase.firestore.Firestore;
-
-  constructor(db: any) {
+  constructor(private db: firebase.firestore.Firestore) {
     this.db = db;
   }
 

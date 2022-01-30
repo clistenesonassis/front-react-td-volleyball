@@ -1,9 +1,4 @@
 import firebase from 'firebase';
-import {
-  FirebaseStoreRequest,
-  FirebaseStoreResponse,
-  FirebaseStoreStatusCode,
-} from '../../data/protocols/localstore/firebase/store';
 import { firebaseConfig } from '../config/firebase';
 
 export class Firebase {
@@ -19,7 +14,11 @@ export class Firebase {
     };
 
     // Initialize Cloud Firestore through Firebase
-    this.app = firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      this.app = firebase.initializeApp(config);
+    } else {
+      this.app = firebase.app(); // if already initialized, use that one
+    }
 
     this.db = firebase.firestore(this.app);
   }

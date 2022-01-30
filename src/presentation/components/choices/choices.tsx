@@ -7,6 +7,8 @@ import { validResponse } from '../../../mapper/keyboard-answers';
 import { Container, Option } from './styles/choices';
 import { Response } from '../../../service/answerService';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
+import { iVideo } from '../../../utils/videos/Videos';
+import { VideoService } from '../../../utils';
 
 const Choices: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -15,12 +17,14 @@ const Choices: React.FC = (): JSX.Element => {
   );
   let startResponse: any;
   const ResponseService = Response.getInstance();
+  let timer: any;
+  const playlist: iVideo[] = VideoService.get();
 
   useEffect(() => {
     document.addEventListener('keydown', myEvent);
     startResponse = moment();
 
-    isTimeout();
+    timer = startTimer();
 
     return () => removeListener();
   }, []);
@@ -30,20 +34,21 @@ const Choices: React.FC = (): JSX.Element => {
   };
 
   const myEvent = (event: KeyboardEvent) => {
+    removeListener();
+    clearTimeout(timer);
     vote(event.key);
   };
 
-  const isTimeout = () => {
-    setTimeout(() => {
+  const startTimer = () => {
+    return setTimeout(() => {
       const duration = moment
         .duration(moment().diff(startResponse))
         .asSeconds();
-      console.log('duration: ', duration);
 
       if (duration >= 3) {
         vote('miss');
       } else {
-        isTimeout();
+        timer = startTimer();
       }
     }, 1000);
   };
@@ -56,17 +61,20 @@ const Choices: React.FC = (): JSX.Element => {
         .duration(moment().diff(startResponse))
         .asMilliseconds();
 
-      console.log('votando...', response);
       ResponseService.votar({
         response,
         video: store.currentVideo!,
         timeToResponse: duration,
       });
+
+      const isFinished = playlist.length === store.currentVideo! + 1;
+
       dispatch(
         AnswerImpl({
           options: false,
           video: false,
-          counterdown: true,
+          end: isFinished,
+          counterdown: !isFinished,
           currentVideo: store.currentVideo! + 1,
         }),
       );
@@ -75,11 +83,11 @@ const Choices: React.FC = (): JSX.Element => {
 
   return (
     <Container>
-      <Option>Diagonal forte</Option>
-      <Option>Diagonal colocado</Option>
-      <Option>Corredor forte</Option>
-      <Option>Corredor colocado</Option>
-      <Option>Explorando o bloqueio para destro</Option>
+      <Option onClick={() => vote('a')}>Diagonal forte</Option>
+      <Option onClick={() => vote('s')}>Diagonal colocado</Option>
+      <Option onClick={() => vote('d')}>Corredor forte</Option>
+      <Option onClick={() => vote('f')}>Corredor colocado</Option>
+      <Option onClick={() => vote(' ')}>Explorando o bloqueio</Option>
     </Container>
   );
 };

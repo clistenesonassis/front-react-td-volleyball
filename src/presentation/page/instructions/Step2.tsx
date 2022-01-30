@@ -4,13 +4,7 @@ import { Button } from '../../components/common/button';
 
 import { intruction1, intruction2 } from '../../base/assets/image';
 
-import {
-  Container,
-  Title,
-  Descriptions,
-  Photo,
-  Footer,
-} from './styles/StyledStep2';
+import { Container, Title, Descriptions, Photo, Footer } from './step2.styles';
 
 interface ownProps {
   onClick?: () => any;
@@ -18,7 +12,7 @@ interface ownProps {
 
 const Step2: React.FC<ownProps> = props => {
   return (
-    <Container>
+    <Container className="container">
       <Title>Instruções para o Teste</Title>
       <Descriptions>
         Seu time sempre será o mais próximo a câmera como indicado na figura

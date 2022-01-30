@@ -1,31 +1,24 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: white;
+  border: 1px solid black;
+  padding: 20px;
 `;
 
-export const Title = styled.h2``;
+export const Title = styled.h2`
+  margin-bottom: 30px;
+`;
 
 export const Descriptions = styled.div`
-  max-width: 600px;
+  max-width: 900px;
   text-align: center;
-  margin: 15px 0px;
-`;
-
-export const Photo = styled.div`
-  max-width: 1400px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-
-  img {
-    width: 100%;
-  }
+  font-size: 24px;
+  color: black;
 `;
 
 export const Footer = styled.div`

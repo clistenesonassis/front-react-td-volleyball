@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lineFull } from '../../base/assets/image';
 
 interface iGroup {
   quant?: string[];
@@ -6,24 +7,30 @@ interface iGroup {
 }
 
 export const Container = styled.div`
-  border: 2px solid red;
+  background: ${props => props.theme.background};
+  background-image: url(${lineFull});
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .back {
+    background-color: red;
+  }
 `;
 
 export const Form = styled.form`
-  background: #e5e7e5;
   max-width: 800px;
   width: 100%;
   display: grid;
   grid-gap: 15px;
   padding: 20px;
-  border: 2px solid #b1b1b1;
-  border-radius: 10px;
+  background: ${props => props.theme.primary};
+  border-radius: 5px;
 `;
 
 export const Group = styled.div<iGroup>`
@@ -32,11 +39,15 @@ export const Group = styled.div<iGroup>`
   grid-template-columns: ${props =>
     props.quant ? props.quant.join(' ') : '1fr 1fr'};
   grid-gap: ${props => props.gap || '10px'};
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Footer = styled.div`
   margin-top: 30px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;

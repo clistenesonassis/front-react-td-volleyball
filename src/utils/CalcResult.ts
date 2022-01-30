@@ -1,5 +1,5 @@
 import { iResponse } from '../service';
-import { iVideo } from './Videos';
+import { iVideo } from './videos/Videos';
 
 export class CalcResult {
   private result: iResponse[];

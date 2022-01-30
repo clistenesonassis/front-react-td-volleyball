@@ -1,16 +1,17 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Page } from './styles';
-import { Response } from '../../../service/answerService';
-import { CalcResult } from '../../../utils/CalcResult';
-import { VideoService, isMobile } from '../../../utils';
+import { Response } from '../../../../../service/answerService';
+import { CalcResult } from '../../../../../utils/CalcResult';
+import { VideoService, isMobile } from '../../../../../utils';
 
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import { AnswerImpl } from '../../../../../data/store/reducer/actions';
 
-import { Card } from '../../components/card';
+import { Card } from '../../../../components/card';
 
-const Result: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
+export const Result: React.FC<{ history: any }> = ({
+  history,
+}): JSX.Element => {
   const responseService = Response.getInstance();
   const videos = responseService.answers();
   const playlist = VideoService.get();
@@ -27,12 +28,12 @@ const Result: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
       AnswerImpl({
         options: false,
         video: false,
-        counterdown: false,
+        counterdown: true,
         currentVideo: 0,
-        score: 0,
+        end: false,
       }),
     );
-    history.push('/');
+    history.push('/exam');
   };
 
   return (
@@ -63,12 +64,10 @@ const Result: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
         </div>
         <div>
           <button type="button" onClick={finish}>
-            Voltar ao inicio
+            Iniciar o teste real
           </button>
         </div>
       </div>
     </Page>
   );
 };
-
-export default Result;
