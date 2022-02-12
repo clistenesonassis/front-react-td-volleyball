@@ -1,23 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Page } from './styles';
-import { Response } from '../../../../../service/answerService';
+import { ResponseImpl } from '../../../../../service/answerService';
 import { CalcResult } from '../../../../../utils/CalcResult';
 import { VideoService, isMobile } from '../../../../../utils';
 
 import { AnswerImpl } from '../../../../../data/store/reducer/actions';
 
 import { Card } from '../../../../components/card';
+import { iReducer } from '../../../../../domain/interfaces/redux/reducer';
+import { Rater } from '../../../../components/rater';
 
 export const Result: React.FC<{ history: any }> = ({
   history,
 }): JSX.Element => {
-  const responseService = Response.getInstance();
+  const responseService = ResponseImpl.getInstance();
   const videos = responseService.answers();
   const playlist = VideoService.get();
 
   const result = new CalcResult(playlist, videos);
   const dispatch = useDispatch();
+
+  const state: iReducer = useSelector(
+    (reducer: { app: iReducer }) => reducer.app,
+  );
 
   const mobile = isMobile()
     ? 'O usuário está usando celular.'
@@ -33,8 +39,12 @@ export const Result: React.FC<{ history: any }> = ({
         end: false,
       }),
     );
-    history.push('/exam');
+    history.push('/');
   };
+
+  // console.log('sending data....');
+  // console.log('user data: ', state.user);
+  // console.log('answers: ', responseService.answers());
 
   return (
     <Page>

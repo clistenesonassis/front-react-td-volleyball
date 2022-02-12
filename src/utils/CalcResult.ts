@@ -1,12 +1,12 @@
-import { iResponse } from '../service';
+import { Answer } from '../domain/models';
 import { iVideo } from './videos/Videos';
 
 export class CalcResult {
-  private result: iResponse[];
+  private result: Answer[];
 
   private videos: iVideo[];
 
-  constructor(videos: iVideo[], result: iResponse[]) {
+  constructor(videos: iVideo[], result: Answer[]) {
     this.result = result;
     this.videos = videos;
   }

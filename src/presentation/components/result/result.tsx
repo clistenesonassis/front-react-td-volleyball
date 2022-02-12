@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Page } from './styles';
-import { Response } from '../../../service/answerService';
+import { ResponseImpl } from '../../../service/answerService';
 import { CalcResult } from '../../../utils/CalcResult';
 import { VideoService } from '../../../utils';
 
@@ -22,7 +22,7 @@ const Result: React.FC<Props> = ({
   btnAction,
   btnContent,
 }): JSX.Element => {
-  const responseService = Response.getInstance();
+  const responseService = ResponseImpl.getInstance();
   const videos = responseService.answers();
   const playlist = VideoService.get();
 

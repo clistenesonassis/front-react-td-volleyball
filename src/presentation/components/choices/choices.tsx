@@ -5,7 +5,7 @@ import { AnswerImpl } from '../../../data/store/reducer/actions';
 import { validResponse } from '../../../mapper/keyboard-answers';
 
 import { Container, Option } from './styles/choices';
-import { Response } from '../../../service/answerService';
+import { ResponseImpl } from '../../../service/answerService';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { iVideo } from '../../../utils/videos/Videos';
 import { VideoService } from '../../../utils';
@@ -16,7 +16,7 @@ const Choices: React.FC = (): JSX.Element => {
     (reducer: { app: iReducer }) => reducer.app,
   );
   let startResponse: any;
-  const ResponseService = Response.getInstance();
+  const ResponseService = ResponseImpl.getInstance();
   let timer: any;
   const playlist: iVideo[] = VideoService.get();
 

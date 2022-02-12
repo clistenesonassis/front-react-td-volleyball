@@ -1,27 +1,23 @@
-export interface iResponse {
-  video: number;
-  response: string;
-  timeToResponse: number;
-}
+import { Answer } from '../domain/models';
 
-export class Response {
-  private static instance: Response;
+export class ResponseImpl {
+  private static instance: ResponseImpl;
 
-  private response: iResponse[];
+  private response: Answer[];
 
   private constructor() {
     this.response = [];
   }
 
-  public static getInstance(): Response {
-    if (!Response.instance) {
-      Response.instance = new Response();
+  public static getInstance(): ResponseImpl {
+    if (!ResponseImpl.instance) {
+      ResponseImpl.instance = new ResponseImpl();
     }
 
-    return Response.instance;
+    return ResponseImpl.instance;
   }
 
-  public votar(params: iResponse): boolean {
+  public votar(params: Answer): boolean {
     let already = false;
     this.response.forEach(item => {
       if (item.video === params.video) already = true;
@@ -39,9 +35,9 @@ export class Response {
     return true;
   }
 
-  public answers(): iResponse[] {
+  public answers(): Answer[] {
     return this.response;
   }
 }
 
-export default Response.getInstance();
+export default ResponseImpl.getInstance();

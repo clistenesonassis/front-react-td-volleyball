@@ -2,29 +2,8 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Container } from './home.styles';
 import { line1, volei } from '../../base/assets/image';
-import { makeRemoteUser } from '../../../main/factories/usecases/UserFactory';
 
 const Home: React.FC<RouteComponentProps> = (props): JSX.Element => {
-  const test = () =>
-    makeRemoteUser()
-      .create({
-        birth_date: '',
-        city: 'joão pessoa',
-        competitive_level: '',
-        competitive_profile: '',
-        email: '',
-        gender: '',
-        id: '001',
-        name: '',
-        olympic_games: true,
-        phone: '',
-        practice_time: 10,
-        state: '',
-        training_amount: 2,
-        training_hours: 2,
-      })
-      .then(e => console.log('saved: ', e));
-
   return (
     <Container>
       <div id="section1" className="container">
@@ -44,9 +23,6 @@ const Home: React.FC<RouteComponentProps> = (props): JSX.Element => {
           <a href="/register" className="next">
             Teste agora sua habilidade &gt;
           </a>
-          <button type="button" onClick={test}>
-            save
-          </button>
         </div>
 
         <div className="image">

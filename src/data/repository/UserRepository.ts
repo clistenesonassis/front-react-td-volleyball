@@ -12,9 +12,23 @@ export class UserRepository {
 
   public async create(user: User): Promise<FirebaseStoreResponse> {
     return this.db
-      .collection('user')
-      .doc('test')
+      .collection('answers')
+      .doc()
       .set(user)
+      .then(e => ({
+        body: e,
+        statusCode: FirebaseStoreStatusCode.ok,
+      }))
+      .catch(e => ({
+        body: e,
+        statusCode: FirebaseStoreStatusCode.serverError,
+      }));
+  }
+
+  public async get(): Promise<FirebaseStoreResponse> {
+    return this.db
+      .collection('answers')
+      .get()
       .then(e => ({
         body: e,
         statusCode: FirebaseStoreStatusCode.ok,
