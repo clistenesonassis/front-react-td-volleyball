@@ -4,7 +4,7 @@ import { Button } from '../../components/common/button';
 
 import { intruction1, intruction2 } from '../../base/assets/image';
 
-import { Container, Title, Descriptions, Photo, Footer } from './step2.styles';
+import { Container } from './step2.styles';
 
 interface ownProps {
   onClick?: () => any;
@@ -13,21 +13,21 @@ interface ownProps {
 const Step2: React.FC<ownProps> = props => {
   return (
     <Container className="container">
-      <Title>Instruções para o Teste</Title>
-      <Descriptions>
+      <h1 className="title">Instruções para o Teste</h1>
+      <p className="description">
         Seu time sempre será o mais próximo a câmera como indicado na figura
         abaixo pelas setas vermelhas. Antes de iniciar o teste, você verá duas
         cenas para familiarização.
-      </Descriptions>
-      <Photo>
+      </p>
+      <div className="photo">
         <img alt="intruction1" src={intruction1} />
         <img alt="intruction2" src={intruction2} />
-      </Photo>
-      <Footer>
+      </div>
+      <div className="footer">
         <Button onClick={props.onClick} autoFocus>
           Continuar
         </Button>
-      </Footer>
+      </div>
     </Container>
   );
 };

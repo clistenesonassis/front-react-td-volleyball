@@ -5,7 +5,7 @@ import { AnswerImpl } from '../../../data/store/reducer/actions';
 import { validResponse } from '../../../mapper/keyboard-answers';
 
 import { Container, Option } from './styles/choices';
-import { ResponseImpl } from '../../../service/answerService';
+import { answerService } from '../../../service';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { iVideo } from '../../../utils/videos/Videos';
 import { VideoService } from '../../../utils';
@@ -16,7 +16,6 @@ const Choices: React.FC = (): JSX.Element => {
     (reducer: { app: iReducer }) => reducer.app,
   );
   let startResponse: any;
-  const ResponseService = ResponseImpl.getInstance();
   let timer: any;
   const playlist: iVideo[] = VideoService.get();
 
@@ -31,11 +30,10 @@ const Choices: React.FC = (): JSX.Element => {
 
   const removeListener = () => {
     document.removeEventListener('keydown', myEvent);
+    clearTimeout(timer);
   };
 
   const myEvent = (event: KeyboardEvent) => {
-    removeListener();
-    clearTimeout(timer);
     vote(event.key);
   };
 
@@ -61,7 +59,7 @@ const Choices: React.FC = (): JSX.Element => {
         .duration(moment().diff(startResponse))
         .asMilliseconds();
 
-      ResponseService.votar({
+      answerService.votar({
         response,
         video: store.currentVideo!,
         timeToResponse: duration,

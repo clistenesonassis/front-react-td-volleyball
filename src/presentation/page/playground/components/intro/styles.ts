@@ -17,4 +17,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
+
+  .title-intro {
+    text-align: center;
+  }
 `;

@@ -7,9 +7,17 @@ export interface Answer extends Action {
   payload: iReducer;
 }
 
+export interface Reset extends Action {
+  type: ReducerTypes.reset;
+}
+
 export const AnswerImpl = (params: iReducer): Answer => ({
   type: ReducerTypes.answer,
   payload: params,
 });
 
-export type ReducerActions = Answer;
+export const ResetImpl = (): Reset => ({
+  type: ReducerTypes.reset,
+});
+
+export type ReducerActions = Answer | Reset;

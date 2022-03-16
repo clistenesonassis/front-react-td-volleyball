@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Page } from './styles';
-import { ResponseImpl } from '../../../service/answerService';
+import { answerService } from '../../../service';
 import { CalcResult } from '../../../utils/CalcResult';
 import { VideoService } from '../../../utils';
 
@@ -17,13 +17,8 @@ export interface iProps {
 
 type Props = iProps & RouteComponentProps;
 
-const Result: React.FC<Props> = ({
-  history,
-  btnAction,
-  btnContent,
-}): JSX.Element => {
-  const responseService = ResponseImpl.getInstance();
-  const videos = responseService.answers();
+const Result: React.FC<Props> = ({ btnAction, btnContent }): JSX.Element => {
+  const videos = answerService.answers();
   const playlist = VideoService.get();
 
   const result = new CalcResult(playlist, videos);

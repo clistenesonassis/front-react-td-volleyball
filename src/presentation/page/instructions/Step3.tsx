@@ -26,10 +26,10 @@ const Step3: React.FC<ownProps> = props => {
         para visualização do resultado. Posicione a mão dominante e clique em
         iniciar teste para começar. Preparado?
       </Descriptions>
-      <Photo>
-        <img alt="intruction3" src={intruction3} />
-        <img alt="intruction4" src={intruction4} />
-      </Photo>
+      <div className="photos">
+        <img alt="intructions" src={intruction3} />
+        <img alt="intructions" src={intruction4} />
+      </div>
       <Warning>
         Mantenha a mão dominante posicionada de modo que cada dedo fique sobre
         uma tecla.

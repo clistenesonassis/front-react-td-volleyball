@@ -11,7 +11,6 @@ const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
 
   const SendData = () =>
     makeRemoteUser().create({
-      id: v4(),
       name: '',
       birth_date: '',
       email: 'clistenes808@gmail.com',
@@ -25,24 +24,14 @@ const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
       competitive_profile: '',
       competitive_level: '',
       olympic_games: true,
-      answers: [
-        {
-          response: 'tt',
-          timeToResponse: 100,
-          video: 1,
-        },
-      ],
     });
 
   const GetData = () =>
     makeRemoteUser()
-      .get()
+      .get('clistenes808@gmail.com')
       .then(e => {
         console.log('response: ', e);
-        e.body.forEach((doc: any) => {
-          console.log(doc);
-          console.log(doc.id, '=>', doc.data());
-        });
+        console.log(e.body.data());
       });
 
   return (

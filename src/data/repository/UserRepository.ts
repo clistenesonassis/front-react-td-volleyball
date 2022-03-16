@@ -12,8 +12,8 @@ export class UserRepository {
 
   public async create(user: User): Promise<FirebaseStoreResponse> {
     return this.db
-      .collection('answers')
-      .doc()
+      .collection('users')
+      .doc(user.email)
       .set(user)
       .then(e => ({
         body: e,
@@ -25,9 +25,10 @@ export class UserRepository {
       }));
   }
 
-  public async get(): Promise<FirebaseStoreResponse> {
+  public async get(email: string): Promise<FirebaseStoreResponse> {
     return this.db
-      .collection('answers')
+      .collection('users')
+      .doc(email)
       .get()
       .then(e => ({
         body: e,
@@ -35,7 +36,7 @@ export class UserRepository {
       }))
       .catch(e => ({
         body: e,
-        statusCode: FirebaseStoreStatusCode.serverError,
+        statusCode: FirebaseStoreStatusCode.notFound,
       }));
   }
 }

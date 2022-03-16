@@ -18,12 +18,12 @@ export const initialState: iReducer = {
     city: '',
     state: '',
     hand: '',
-    practiceTime: '',
-    trainingAmount: '',
-    trainingHours: '',
+    practiceTime: 0,
+    trainingAmount: 0,
+    trainingHours: 0,
     competitiveProfile: '',
     competitiveLevel: '',
-    olympicGames: '',
+    olympicGames: false,
   },
 };
 
@@ -31,6 +31,8 @@ const reducer = (state = initialState, action: ReducerActions): iReducer => {
   switch (action.type) {
     case ReducerTypes.answer:
       return { ...state, ...action.payload };
+    case ReducerTypes.reset:
+      return initialState;
     default:
       return state;
   }

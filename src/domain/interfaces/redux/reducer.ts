@@ -14,11 +14,11 @@ export interface iReducer {
     city: string;
     state: string;
     hand: string;
-    practiceTime: string;
-    trainingAmount: string;
-    trainingHours: string;
+    practiceTime: number;
+    trainingAmount: number;
+    trainingHours: number;
     competitiveProfile: string;
     competitiveLevel: string;
-    olympicGames: string;
+    olympicGames: boolean;
   };
 }

@@ -3,5 +3,5 @@ import { User } from '../models/User';
 
 export interface UserUsercase {
   create: (data: User) => Promise<FirebaseStoreResponse>;
-  get: () => Promise<FirebaseStoreResponse>;
+  get: (email: string) => Promise<FirebaseStoreResponse>;
 }

@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Page } from './styles';
-import { ResponseImpl } from '../../../../../service/answerService';
+import { answerService } from '../../../../../service';
 import { CalcResult } from '../../../../../utils/CalcResult';
 import { VideoService, isMobile } from '../../../../../utils';
 
-import { AnswerImpl } from '../../../../../data/store/reducer/actions';
+import {
+  AnswerImpl,
+  ResetImpl,
+} from '../../../../../data/store/reducer/actions';
 
 import { Card } from '../../../../components/card';
 import { iReducer } from '../../../../../domain/interfaces/redux/reducer';
-import { Rater } from '../../../../components/rater';
+import { makeRemoteAnswer } from '../../../../../main/factories/usecases/UserFactory';
 
 export const Result: React.FC<{ history: any }> = ({
   history,
 }): JSX.Element => {
-  const responseService = ResponseImpl.getInstance();
-  const videos = responseService.answers();
+  const videos = answerService.answers();
   const playlist = VideoService.get();
 
   const result = new CalcResult(playlist, videos);
@@ -25,26 +27,28 @@ export const Result: React.FC<{ history: any }> = ({
     (reducer: { app: iReducer }) => reducer.app,
   );
 
-  const mobile = isMobile()
-    ? 'O usuário está usando celular.'
-    : 'O usuário está usando computador.';
+  useEffect(() => {
+    const { user } = state;
+
+    console.log('sending data....');
+    console.log('user data: ', state.user);
+    console.log('answers: ', answerService.answers());
+
+    makeRemoteAnswer()
+      .create({
+        owner: user!.email,
+        answer: answerService.answers(),
+      })
+      .then(e => {
+        console.log('firebase response: ', e);
+      })
+      .catch(e => console.log('response error: ', e));
+  }, []);
 
   const finish = () => {
-    dispatch(
-      AnswerImpl({
-        options: false,
-        video: false,
-        counterdown: true,
-        currentVideo: 0,
-        end: false,
-      }),
-    );
+    dispatch(ResetImpl());
     history.push('/');
   };
-
-  // console.log('sending data....');
-  // console.log('user data: ', state.user);
-  // console.log('answers: ', responseService.answers());
 
   return (
     <Page>
@@ -74,7 +78,7 @@ export const Result: React.FC<{ history: any }> = ({
         </div>
         <div>
           <button type="button" onClick={finish}>
-            Iniciar o teste real
+            Fazer um novo teste
           </button>
         </div>
       </div>

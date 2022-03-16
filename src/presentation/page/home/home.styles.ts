@@ -1,61 +1,60 @@
 import styled from 'styled-components';
-import { backgroundVolei } from '../../base/assets/image';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
   background: ${props => props.theme.background};
   position: relative;
-  overflow-y: auto;
+  width: 100vw;
+  height: 100vh;
 
-  .line1 {
-    position: absolute;
-  }
-
-  .line1 {
-    top: 0;
-    right: 0;
-  }
-
-  .container {
-    display: flex;
-    align-items: center;
+  .home {
     height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    .content {
-      .title {
-        font-size: 50px;
+    &_content {
+      &_title {
+        font-size: 28px;
         color: ${props => props.theme.primary};
       }
 
-      .subtitle {
-        font-size: 24px;
+      &_subtitle {
+        font-size: 20px;
+        max-width: 530px;
         color: ${props => props.theme.primaryLight};
       }
 
-      .next {
-        font-size: 20px;
+      &_link {
+        font-size: 16px;
         color: ${props => props.theme.primary};
       }
     }
-  }
 
-  #section1 {
-    justify-content: space-between;
-  }
+    &_image {
+      display: none;
+    }
 
-  #section2 {
-    background-image: url(${backgroundVolei});
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @media (min-width: 768px) {
+      &_content {
+        &_title {
+          font-size: 40px;
+          color: ${props => props.theme.primary};
+        }
 
-    p {
-      color: ${props => props.theme.primaryLight};
-      max-width: 1024px;
-      text-align: center;
-      font-size: 20px;
-      line-height: 50px;
+        &_subtitle {
+          font-size: 24px;
+          color: ${props => props.theme.primaryLight};
+        }
+
+        &_link {
+          font-size: 16px;
+          color: ${props => props.theme.primary};
+        }
+      }
+
+      .home_image {
+        display: flex;
+      }
     }
   }
 `;

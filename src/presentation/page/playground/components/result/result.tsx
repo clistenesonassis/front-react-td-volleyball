@@ -1,15 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Page } from './styles';
-import { ResponseImpl } from '../../../../../service/answerService';
+import { answerService } from '../../../../../service';
 import { CalcResult } from '../../../../../utils/CalcResult';
 import { VideoService, isMobile } from '../../../../../utils';
 
 import { AnswerImpl } from '../../../../../data/store/reducer/actions';
 
 const Result: React.FC<{ history: any }> = ({ history }): JSX.Element => {
-  const responseService = ResponseImpl.getInstance();
-  const videos = responseService.answers();
+  const videos = answerService.answers();
   const playlist = VideoService.get();
 
   const result = new CalcResult(playlist, videos);

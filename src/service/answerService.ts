@@ -1,9 +1,9 @@
-import { Answer } from '../domain/models';
+import { VideoAnswer } from '../domain/models';
 
-export class ResponseImpl {
+class ResponseImpl {
   private static instance: ResponseImpl;
 
-  private response: Answer[];
+  private response: VideoAnswer[];
 
   private constructor() {
     this.response = [];
@@ -17,7 +17,11 @@ export class ResponseImpl {
     return ResponseImpl.instance;
   }
 
-  public votar(params: Answer): boolean {
+  public clearVotes(): void {
+    this.response = [];
+  }
+
+  public votar(params: VideoAnswer): boolean {
     let already = false;
     this.response.forEach(item => {
       if (item.video === params.video) already = true;
@@ -35,7 +39,7 @@ export class ResponseImpl {
     return true;
   }
 
-  public answers(): Answer[] {
+  public answers(): VideoAnswer[] {
     return this.response;
   }
 }

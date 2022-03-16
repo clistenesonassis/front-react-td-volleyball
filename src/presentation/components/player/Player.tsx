@@ -5,7 +5,7 @@ import { AnswerImpl } from '../../../data/store/reducer/actions';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { VideoService } from '../../../utils';
 import { iVideo } from '../../../utils/videos/Videos';
-import { Painel } from './styles/StyledPlayer';
+import { Container, Painel } from './styles/StyledPlayer';
 
 interface videoProgress {
   played: number;
@@ -31,18 +31,20 @@ const Player: React.FC = (): JSX.Element => {
   return (
     <>
       {state.video ? (
-        <ReactPlayer
-          url={playlist[state.currentVideo!].src}
-          height="700px"
-          width="100%"
-          id="video"
-          playing
-          controls={false}
-          progressInterval={1000}
-          onProgress={(e: videoProgress) => {
-            analyzeTime(e, playlist[state.currentVideo!].end);
-          }}
-        />
+        <Container>
+          <ReactPlayer
+            url={playlist[state.currentVideo!].src}
+            height="100%"
+            width="100%"
+            id="react-player"
+            playing
+            controls={false}
+            progressInterval={1000}
+            onProgress={(e: videoProgress) => {
+              analyzeTime(e, playlist[state.currentVideo!].end);
+            }}
+          />
+        </Container>
       ) : (
         <Painel />
       )}

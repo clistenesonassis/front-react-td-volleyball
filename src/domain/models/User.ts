@@ -1,8 +1,5 @@
-import { Answer } from './Answer';
-
 /* eslint-disable camelcase */
-export type User = {
-  id: string;
+export interface User {
   birth_date: string;
   city: string;
   competitive_level: string;
@@ -16,5 +13,4 @@ export type User = {
   state: string;
   training_amount: number;
   training_hours: number;
-  answers: Answer[];
-};
+}
