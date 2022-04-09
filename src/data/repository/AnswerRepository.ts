@@ -43,6 +43,7 @@ export class AnswerRepository implements AnswerUsercase {
   public async getBy(email: string): Promise<FirebaseStoreResponse> {
     return this.db
       .collection('answers')
+      .where('owner', '==', email)
       .get()
       .then(e => ({
         body: e,

@@ -1,5 +1,5 @@
+import { Videos } from '../domain/models';
 import {
-  iVideo,
   VideosExamFeminino,
   VideosExamMasculino,
   VideosTestFeminino,
@@ -11,7 +11,7 @@ type Gender = 'feminino' | 'masculino';
 class PlaylistData {
   private static instance: PlaylistData;
 
-  private playlist: iVideo[];
+  private playlist: Videos[];
 
   constructor() {
     this.playlist = [];
@@ -33,7 +33,7 @@ class PlaylistData {
    * Pegar uma playlist.
    * @param quantidade Quantidade de videos que a playlist deve possuir.
    */
-  public getPlaylist(amount: number, gender: Gender): iVideo[] {
+  public getPlaylist(amount: number, gender: Gender): Videos[] {
     const data =
       gender === 'feminino'
         ? new Array(...VideosExamFeminino)
@@ -60,7 +60,7 @@ class PlaylistData {
    * Pegar uma playlist.
    * @param quantidade Quantidade de videos que a playlist deve possuir.
    */
-  public getPlaylistTeste(amount: number, gender: Gender): iVideo[] {
+  public getPlaylistTeste(amount: number, gender: Gender): Videos[] {
     const data =
       gender === 'feminino'
         ? new Array(...VideosTestFeminino)

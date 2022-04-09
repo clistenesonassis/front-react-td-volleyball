@@ -27,10 +27,6 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
-
-  .back {
-    background-color: red;
-  }
 `;
 
 export const Form = styled.form`

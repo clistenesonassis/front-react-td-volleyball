@@ -6,7 +6,7 @@ import { CalcResult } from '../../../../../utils/CalcResult';
 import { VideoService, isMobile } from '../../../../../utils';
 
 import {
-  AnswerImpl,
+  ChangeState,
   ResetImpl,
 } from '../../../../../data/store/reducer/actions';
 
@@ -36,7 +36,7 @@ export const Result: React.FC<{ history: any }> = ({
 
     makeRemoteAnswer()
       .create({
-        owner: user!.email,
+        owner: user?.email || '',
         answer: answerService.answers(),
       })
       .then(e => {

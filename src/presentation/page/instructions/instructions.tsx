@@ -12,10 +12,13 @@ const Intructions: React.FC<RouteComponentProps> = props => {
 
   return (
     <Container>
-      {step === 1 && <Step1 onClick={() => setStep(2)} />}
-      {step === 2 && <Step2 onClick={() => setStep(3)} />}
+      {step === 1 && <Step1 next={() => setStep(2)} />}
+      {step === 2 && <Step2 back={() => setStep(1)} next={() => setStep(3)} />}
       {step === 3 && (
-        <Step3 onClick={() => props.history.push('/playground')} />
+        <Step3
+          back={() => setStep(2)}
+          next={() => props.history.push('/playground')}
+        />
       )}
     </Container>
   );

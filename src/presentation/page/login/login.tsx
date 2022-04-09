@@ -1,43 +1,38 @@
+import { LoadingButton } from '@mui/lab';
 import { TextField } from '@mui/material';
 import { History } from 'history';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import dispatch from '../../../data/store/reducer/dispatch';
 import { makeRemoteUser } from '../../../main/factories/usecases/UserFactory';
 import { Container } from './login.style';
 
 type Props = {
-  setNeedRegister: (data: boolean) => void;
   history: History;
 };
 
-export const LoginComponent: React.FC<Props> = ({
-  setNeedRegister,
-  history,
-}) => {
+export const LoginComponent: React.FC<Props> = ({ history }) => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState({
     status: false,
     msg: 'Email não encontrado',
   });
 
-  const dispatch = useDispatch();
-
   const submit = (e: any) => {
     e.preventDefault();
+    setLoading(true);
     makeRemoteUser()
       .get(email)
       .then(response => {
+        setLoading(false);
         if (response.body.data()) {
           setEmailError({
             status: false,
             msg: '',
           });
-          dispatch(
-            AnswerImpl({
-              user: response.body.data(),
-            }),
-          );
+          dispatch.sendChangeState({
+            user: response.body.data(),
+          });
           history.push('/instructions');
         } else {
           setEmailError({
@@ -46,7 +41,10 @@ export const LoginComponent: React.FC<Props> = ({
           });
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        setLoading(false);
+        console.error(err);
+      });
   };
 
   return (
@@ -62,7 +60,9 @@ export const LoginComponent: React.FC<Props> = ({
             onChange={e => setEmail(e.target.value)}
             required
           />
-          <button type="submit">entrar</button>
+          <LoadingButton loading={loading} variant="contained" type="submit">
+            Entrar
+          </LoadingButton>
         </form>
         <a href="/register">Cadastre-se</a>
       </div>

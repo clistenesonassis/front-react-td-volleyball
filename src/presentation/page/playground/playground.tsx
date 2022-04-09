@@ -6,7 +6,7 @@ import { Game } from './components/game/Game';
 import Result from './components/result/result';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { VideoService } from '../../../utils';
-import { answerService } from '../../../service';
+import dispatch from '../../../data/store/reducer/dispatch';
 
 const Playground: React.FC<RouteComponentProps> = ({
   history,
@@ -20,8 +20,8 @@ const Playground: React.FC<RouteComponentProps> = ({
   useEffect(() => {
     const gender =
       state.user?.gender === 'masculino' ? 'masculino' : 'feminino';
-    VideoService.getPlaylistTeste(3, gender);
-    answerService.clearVotes();
+    const playlist = VideoService.getPlaylistTeste(6, gender);
+    dispatch.Playlist(playlist);
   }, []);
 
   return (

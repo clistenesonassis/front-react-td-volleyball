@@ -7,38 +7,46 @@ interface iProps {
 }
 
 export const Intro: React.FC<iProps> = ({ start }): JSX.Element => {
-  setTimeout(() => {
-    start();
-  }, 10000);
+  useEffect(() => {
+    const timeout1 = setTimeout(() => {
+      start();
+    }, 10000);
 
-  const animeOutTitle = () => {
-    const element = document.querySelector('.title-intro');
-    element!.classList.remove('animate__fadeInUp');
-    element!.classList.add('animate__fadeOutUp');
-  };
+    const animeOutTitle = () => {
+      const element = document.querySelector('.title-intro');
+      element!.classList.remove('animate__fadeInUp');
+      element!.classList.add('animate__fadeOutUp');
+    };
 
-  const animeInTitle = (data: string) => {
-    const element = document.querySelector('.title-intro');
-    element!.classList.add('animate__fadeInUp');
-    element!.classList.remove('animate__fadeOutUp');
-    element!.innerHTML = data;
+    const animeInTitle = (data: string) => {
+      const element = document.querySelector('.title-intro');
+      element!.classList.add('animate__fadeInUp');
+      element!.classList.remove('animate__fadeOutUp');
+      element!.innerHTML = data;
 
-    element!.addEventListener('animationend', () => {
-      setTimeout(() => {
-        element!.classList.remove('animate__fadeInUp');
-        element!.classList.add('animate__fadeOutUp');
-      }, 3000);
-    });
-  };
+      element!.addEventListener('animationend', () => {
+        setTimeout(() => {
+          element!.classList.remove('animate__fadeInUp');
+          element!.classList.add('animate__fadeOutUp');
+        }, 3000);
+      });
+    };
 
-  setTimeout(() => {
-    animeOutTitle();
-  }, 3000);
+    const timeout2 = setTimeout(() => {
+      animeOutTitle();
+    }, 3000);
 
-  setTimeout(() => {
-    animeOutTitle();
-    animeInTitle('Prepare-se');
-  }, 5000);
+    const timeout3 = setTimeout(() => {
+      animeOutTitle();
+      animeInTitle('Prepare-se');
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+      clearTimeout(timeout3);
+    };
+  }, []);
 
   return (
     <Container>

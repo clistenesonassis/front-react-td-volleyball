@@ -6,6 +6,7 @@ import { Player } from '../../../../components/player';
 import { Choices } from '../../../../components/choices';
 import { Countdown } from '../../../../components/countdown/countdown';
 import { iReducer } from '../../../../../domain/interfaces/redux/reducer';
+import { Painel } from '../../../../components/player/player.styles';
 
 interface Props {
   end: () => any;
@@ -21,7 +22,7 @@ export const Game: React.FC<Props> = ({ end }): JSX.Element => {
   return (
     <Page>
       <div className="container">
-        {!state.counterdown && <Player />}
+        {state.video ? <Player /> : <Painel />}
         {state.options && <Choices />}
       </div>
       {state.counterdown && <Countdown />}

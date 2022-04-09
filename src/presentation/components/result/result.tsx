@@ -1,14 +1,15 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Page } from './styles';
 import { answerService } from '../../../service';
 import { CalcResult } from '../../../utils/CalcResult';
 import { VideoService } from '../../../utils';
 
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import { ChangeState } from '../../../data/store/reducer/actions';
 
 import { Card } from '../card';
+import { iReducer } from '../../../domain/interfaces/redux/reducer';
 
 export interface iProps {
   btnContent: string;
@@ -19,14 +20,17 @@ type Props = iProps & RouteComponentProps;
 
 const Result: React.FC<Props> = ({ btnAction, btnContent }): JSX.Element => {
   const videos = answerService.answers();
-  const playlist = VideoService.get();
 
-  const result = new CalcResult(playlist, videos);
+  const state: iReducer = useSelector(
+    (reducer: { app: iReducer }) => reducer.app,
+  );
+
+  const result = new CalcResult(state.playlist!, videos);
   const dispatch = useDispatch();
 
   const finish = () => {
     dispatch(
-      AnswerImpl({
+      ChangeState({
         options: false,
         video: false,
         counterdown: false,

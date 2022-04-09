@@ -5,6 +5,7 @@ import { Container } from './teste.styles';
 import { VideoService } from '../../../utils';
 import { Rater } from '../../components/rater';
 import { makeRemoteUser } from '../../../main/factories/usecases/UserFactory';
+import { makeRemoteVideo } from '../../../main/factories/usecases/VideoFactory';
 
 const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
   const data = VideoService.getPlaylist(3, 'feminino');
@@ -34,6 +35,15 @@ const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
         console.log(e.body.data());
       });
 
+  const GetVideo = () =>
+    makeRemoteVideo()
+      .get('training', 'feminino')
+      .then(e => {
+        e.body.docs.forEach((res: any) => {
+          console.log('videos: ', res.data());
+        });
+      });
+
   return (
     <>
       <Container>
@@ -45,6 +55,10 @@ const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
 
         <button type="button" onClick={GetData}>
           receive Data
+        </button>
+
+        <button type="button" onClick={GetVideo}>
+          Obter video
         </button>
       </Container>
     </>

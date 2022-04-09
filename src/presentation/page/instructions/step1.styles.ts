@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: white;
-  border: 1px solid black;
+  border: 1px solid #cdcdcd;
   padding: 20px;
+  box-shadow: 1px 1px 10px #cdcdcd;
 
   .title {
     margin-bottom: 30px;

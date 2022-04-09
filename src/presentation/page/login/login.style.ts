@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: ${props => props.theme.background};
+  background: #ffff;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -11,7 +11,6 @@ export const Container = styled.div`
 
   .content {
     padding: 30px;
-    background: #ffff;
     display: flex;
     flex-direction: column;
     align-items: center;

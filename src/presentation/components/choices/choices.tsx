@@ -1,54 +1,52 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { AnswerImpl } from '../../../data/store/reducer/actions';
 import { validResponse } from '../../../mapper/keyboard-answers';
 
-import { Container, Option } from './styles/choices';
-import { answerService } from '../../../service';
+import { Container, Option } from './choices.styles';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
-import { iVideo } from '../../../utils/videos/Videos';
-import { VideoService } from '../../../utils';
+import disptach from '../../../data/store/reducer/dispatch';
 
 const Choices: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch();
   const store: iReducer = useSelector(
     (reducer: { app: iReducer }) => reducer.app,
   );
-  let startResponse: any;
-  let timer: any;
-  const playlist: iVideo[] = VideoService.get();
+  let startResponse: moment.Moment;
+  let timer: number;
 
   useEffect(() => {
-    document.addEventListener('keydown', myEvent);
-    startResponse = moment();
-
-    timer = startTimer();
+    init();
 
     return () => removeListener();
-  }, []);
+  });
+
+  const init = () => {
+    const myEvent = (event: KeyboardEvent) => {
+      document.removeEventListener('keydown', myEvent);
+      vote(event.key);
+    };
+
+    const startTimer = () => {
+      return setTimeout(() => {
+        const duration = moment
+          .duration(moment().diff(startResponse))
+          .asSeconds();
+
+        if (duration >= 3) {
+          vote('miss');
+        } else {
+          timer = startTimer();
+        }
+      }, 1000);
+    };
+
+    document.addEventListener('keydown', myEvent);
+    startResponse = moment();
+    timer = startTimer();
+  };
 
   const removeListener = () => {
-    document.removeEventListener('keydown', myEvent);
     clearTimeout(timer);
-  };
-
-  const myEvent = (event: KeyboardEvent) => {
-    vote(event.key);
-  };
-
-  const startTimer = () => {
-    return setTimeout(() => {
-      const duration = moment
-        .duration(moment().diff(startResponse))
-        .asSeconds();
-
-      if (duration >= 3) {
-        vote('miss');
-      } else {
-        timer = startTimer();
-      }
-    }, 1000);
   };
 
   const vote = (option: string) => {
@@ -59,23 +57,11 @@ const Choices: React.FC = (): JSX.Element => {
         .duration(moment().diff(startResponse))
         .asMilliseconds();
 
-      answerService.votar({
+      disptach.Answer({
         response,
-        video: store.currentVideo!,
-        timeToResponse: duration,
+        videoUrl: store.playlist?.[0] ? store.playlist[0].src : '',
+        time: duration,
       });
-
-      const isFinished = playlist.length === store.currentVideo! + 1;
-
-      dispatch(
-        AnswerImpl({
-          options: false,
-          video: false,
-          end: isFinished,
-          counterdown: !isFinished,
-          currentVideo: store.currentVideo! + 1,
-        }),
-      );
     }
   };
 

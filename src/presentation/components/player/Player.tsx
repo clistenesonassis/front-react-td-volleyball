@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import ReactPlayer from 'react-player';
-import { useDispatch, useSelector } from 'react-redux';
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import { useSelector } from 'react-redux';
+import dispatch from '../../../data/store/reducer/dispatch';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
-import { VideoService } from '../../../utils';
-import { iVideo } from '../../../utils/videos/Videos';
-import { Container, Painel } from './styles/StyledPlayer';
+import { Container } from './player.styles';
 
 interface videoProgress {
   played: number;
@@ -15,40 +14,45 @@ interface videoProgress {
 }
 
 const Player: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch();
   const state: iReducer = useSelector(
     (reducer: { app: iReducer }) => reducer.app,
   );
-  const playlist: iVideo[] = VideoService.get();
+
+  const playlist = state.playlist ? state.playlist : [];
+  let isAllowed: boolean;
+
+  useEffect(() => {
+    isAllowed = true;
+  }, []);
 
   const analyzeTime = (e: videoProgress, end: number): void => {
     const currentTime = Math.trunc(e.playedSeconds);
-    if (currentTime > end) {
-      dispatch(AnswerImpl({ options: true, counterdown: false, video: false }));
+    if (currentTime > end && isAllowed) {
+      isAllowed = false;
+      dispatch.sendChangeState({
+        options: true,
+        counterdown: false,
+        video: false,
+      });
     }
   };
 
   return (
-    <>
-      {state.video ? (
-        <Container>
-          <ReactPlayer
-            url={playlist[state.currentVideo!].src}
-            height="100%"
-            width="100%"
-            id="react-player"
-            playing
-            controls={false}
-            progressInterval={1000}
-            onProgress={(e: videoProgress) => {
-              analyzeTime(e, playlist[state.currentVideo!].end);
-            }}
-          />
-        </Container>
-      ) : (
-        <Painel />
-      )}
-    </>
+    <Container>
+      <ReactPlayer
+        url={playlist[0].src}
+        height="100%"
+        width="100%"
+        id="player"
+        playing={state.video}
+        stopOnUnmount
+        controls={false}
+        progressInterval={200}
+        onProgress={(e: videoProgress) => {
+          analyzeTime(e, playlist[0].end);
+        }}
+      />
+    </Container>
   );
 };
 

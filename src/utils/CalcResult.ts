@@ -1,12 +1,11 @@
-import { VideoAnswer } from '../domain/models';
-import { iVideo } from './videos/Videos';
+import { VideoAnswer, Videos } from '../domain/models';
 
 export class CalcResult {
   private result: VideoAnswer[];
 
-  private videos: iVideo[];
+  private videos: Videos[];
 
-  constructor(videos: iVideo[], result: VideoAnswer[]) {
+  constructor(videos: Videos[], result: VideoAnswer[]) {
     this.result = result;
     this.videos = videos;
   }

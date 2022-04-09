@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 100%;
   width: 100%;
 
-  .react-player {
+  .player {
     position: absolute;
     top: 0;
     left: 0;

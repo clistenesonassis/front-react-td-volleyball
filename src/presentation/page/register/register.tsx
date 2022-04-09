@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Formik } from 'formik';
 import { MenuItem } from '@material-ui/core';
 
 import { History } from 'history';
 import { useDispatch, useSelector } from 'react-redux';
+import { LoadingButton } from '@mui/lab';
+import { Button } from '@mui/material';
 import { Container, Form, Group, Footer } from './register.styles';
-import { Button } from '../../components/common/button';
 import { schema } from '../../../validation/schema/personalData';
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import { ChangeState } from '../../../data/store/reducer/actions';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { makeRemoteUser } from '../../../main/factories/usecases/UserFactory';
 
@@ -21,6 +22,8 @@ export const RegisterComponent: React.FC<Props> = ({
   history,
   setNeedRegister,
 }): JSX.Element => {
+  const [loading, setLoading] = useState(false);
+
   const gender = [
     {
       value: 'masculino',
@@ -126,12 +129,21 @@ export const RegisterComponent: React.FC<Props> = ({
   };
 
   const next = (data: any) => {
-    dispatch(AnswerImpl({ user: data }));
-    makeRemoteUser().create(data);
-    history.push('/login');
-    toastr.success('Cadastro realizado com sucesso!', 'Turtle Bay Resort', {
-      timeOut: 5000,
-    });
+    setLoading(true);
+    makeRemoteUser()
+      .create(data)
+      .then(res => {
+        setLoading(false);
+        dispatch(ChangeState({ user: data }));
+        history.push('/login');
+        toastr.success('Cadastro realizado com sucesso!', 'Turtle Bay Resort', {
+          timeOut: 5000,
+        });
+      })
+      .catch(err => {
+        setLoading(false);
+        console.error(err);
+      });
   };
 
   return (
@@ -351,10 +363,21 @@ export const RegisterComponent: React.FC<Props> = ({
                 </TextField>
               </Group>
               <Footer>
-                <Button className="back" type="button" onClick={back}>
+                <Button
+                  variant="outlined"
+                  type="button"
+                  onClick={back}
+                  size="medium"
+                >
                   Voltar
                 </Button>
-                <Button type="submit">Cadastre-se</Button>
+                <LoadingButton
+                  loading={loading}
+                  variant="contained"
+                  type="submit"
+                >
+                  Cadastre-se
+                </LoadingButton>
               </Footer>
             </Form>
           )}

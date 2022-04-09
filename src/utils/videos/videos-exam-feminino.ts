@@ -1,6 +1,6 @@
-import { iVideo } from './Videos';
+import { Videos } from '../../domain/models';
 
-export const VideosExamFeminino: iVideo[] = [
+export const VideosExamFeminino: Videos[] = [
   {
     src: 'https://www.youtube.com/watch?v=XfLXyjlD_uk&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=1',
     end: 9,

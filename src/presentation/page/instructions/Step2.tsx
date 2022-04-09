@@ -1,18 +1,18 @@
+import { Button } from '@mui/material';
 import React from 'react';
-
-import { Button } from '../../components/common/button';
 
 import { intruction1, intruction2 } from '../../base/assets/image';
 
 import { Container } from './step2.styles';
 
 interface ownProps {
-  onClick?: () => any;
+  back: () => void;
+  next: () => void;
 }
 
-const Step2: React.FC<ownProps> = props => {
+const Step2: React.FC<ownProps> = ({ back, next }) => {
   return (
-    <Container className="container">
+    <Container className="container" onSubmit={next}>
       <h1 className="title">Instruções para o Teste</h1>
       <p className="description">
         Seu time sempre será o mais próximo a câmera como indicado na figura
@@ -24,7 +24,10 @@ const Step2: React.FC<ownProps> = props => {
         <img alt="intruction2" src={intruction2} />
       </div>
       <div className="footer">
-        <Button onClick={props.onClick} autoFocus>
+        <Button type="button" variant="outlined" size="large" onClick={back}>
+          Voltar
+        </Button>
+        <Button type="submit" variant="contained" size="large">
           Continuar
         </Button>
       </div>

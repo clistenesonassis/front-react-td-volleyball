@@ -1,16 +1,15 @@
+import { Button } from '@mui/material';
 import React from 'react';
-
-import { Button } from '../../components/common/button';
 
 import { Container } from './step1.styles';
 
 interface ownProps {
-  onClick?: () => any;
+  next: () => void;
 }
 
-const Step1: React.FC<ownProps> = props => {
+const Step1: React.FC<ownProps> = ({ next }) => {
   return (
-    <Container>
+    <Container onSubmit={next}>
       <h1 className="title">Instruções para o Teste</h1>
       <p className="description">
         Você vai realizar um teste que objetiva avaliar o tempo de resposta e
@@ -21,7 +20,7 @@ const Step1: React.FC<ownProps> = props => {
         você faria para obter o ponto de ataque?”
       </p>
       <div className="footer">
-        <Button onClick={props.onClick} autoFocus>
+        <Button type="submit" variant="contained" size="large">
           Continuar
         </Button>
       </div>

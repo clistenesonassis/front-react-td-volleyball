@@ -5,7 +5,7 @@ import { answerService } from '../../../../../service';
 import { CalcResult } from '../../../../../utils/CalcResult';
 import { VideoService, isMobile } from '../../../../../utils';
 
-import { AnswerImpl } from '../../../../../data/store/reducer/actions';
+import { ChangeState } from '../../../../../data/store/reducer/actions';
 
 const Result: React.FC<{ history: any }> = ({ history }): JSX.Element => {
   const videos = answerService.answers();
@@ -20,7 +20,7 @@ const Result: React.FC<{ history: any }> = ({ history }): JSX.Element => {
 
   const finish = () => {
     dispatch(
-      AnswerImpl({
+      ChangeState({
         options: false,
         video: false,
         counterdown: true,

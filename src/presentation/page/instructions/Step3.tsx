@@ -1,6 +1,5 @@
+import { Button } from '@mui/material';
 import React from 'react';
-
-import { Button } from '../../components/common/button';
 
 import { intruction3, intruction4 } from '../../base/assets/image';
 
@@ -8,18 +7,18 @@ import {
   Container,
   Title,
   Descriptions,
-  Photo,
   Warning,
   Footer,
 } from './step3.styles';
 
 interface ownProps {
-  onClick?: () => any;
+  back: () => void;
+  next: () => void;
 }
 
-const Step3: React.FC<ownProps> = props => {
+const Step3: React.FC<ownProps> = ({ back, next }) => {
   return (
-    <Container className="container">
+    <Container className="container" onSubmit={next}>
       <Title>Instruções para o Teste</Title>
       <Descriptions>
         O teste dura aproximadamente 15 minutos e deve ser realizado completo
@@ -35,7 +34,10 @@ const Step3: React.FC<ownProps> = props => {
         uma tecla.
       </Warning>
       <Footer>
-        <Button onClick={props.onClick} autoFocus>
+        <Button type="button" variant="outlined" size="large" onClick={back}>
+          Voltar
+        </Button>
+        <Button type="submit" variant="contained" size="large">
           Iniciar teste
         </Button>
       </Footer>
