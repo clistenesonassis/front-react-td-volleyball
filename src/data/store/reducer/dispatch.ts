@@ -4,6 +4,7 @@ import {
 } from '../../../domain/interfaces/redux/reducer';
 import {
   Answer,
+  AwaitAnswerImpl,
   ChangeState,
   ClearAnswer,
   Playlist,
@@ -17,6 +18,8 @@ class Dispatch {
   private dispatch = (data: ReducerActions) => store.dispatch(data);
 
   public Playlist = (params: Videos[]) => this.dispatch(Playlist(params));
+
+  public AwaitAnswer = () => this.dispatch(AwaitAnswerImpl());
 
   public Answer = (params: ReducerAnswers) => this.dispatch(Answer(params));
 

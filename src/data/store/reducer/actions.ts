@@ -16,6 +16,10 @@ interface SetPlaylist extends Action {
   payload: Videos[];
 }
 
+interface AwaitAnswer extends Action {
+  type: ReducerTypes.awaitAnswer;
+}
+
 interface Answer extends Action {
   type: ReducerTypes.answer;
   payload: ReducerAnswers;
@@ -39,6 +43,10 @@ export const Playlist = (params: Videos[]): SetPlaylist => ({
   payload: params,
 });
 
+export const AwaitAnswerImpl = (): AwaitAnswer => ({
+  type: ReducerTypes.awaitAnswer,
+});
+
 export const Answer = (params: ReducerAnswers): Answer => ({
   type: ReducerTypes.answer,
   payload: params,
@@ -57,4 +65,5 @@ export type ReducerActions =
   | Answer
   | Reset
   | ClearAnswers
-  | SetPlaylist;
+  | SetPlaylist
+  | AwaitAnswer;
