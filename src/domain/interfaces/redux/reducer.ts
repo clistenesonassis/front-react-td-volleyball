@@ -17,7 +17,7 @@ export interface Reducer {
 
 export interface ReducerAnswers {
   time: number;
-  videoUrl: string;
+  videoId: string;
   response: string;
 }
 

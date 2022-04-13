@@ -59,7 +59,7 @@ const Choices: React.FC = (): JSX.Element => {
 
       disptach.Answer({
         response,
-        videoUrl: store.playlist?.[0] ? store.playlist[0].src : '',
+        videoId: store.playlist?.[0] ? store.playlist[0].id : '',
         time: duration,
       });
     }

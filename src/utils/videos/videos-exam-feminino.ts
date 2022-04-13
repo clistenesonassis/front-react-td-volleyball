@@ -2,7 +2,7 @@ import { Videos } from '../../domain/models';
 
 export const VideosExamFeminino: Videos[] = [
   {
-    src: 'https://www.youtube.com/watch?v=XfLXyjlD_uk&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=1',
+    id: 'XfLXyjlD_uk',
     end: 9,
     reponse: {
       diagonalForte: 0,
@@ -13,7 +13,7 @@ export const VideosExamFeminino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=W4z-JeH1qDU&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=2',
+    id: 'W4z-JeH1qDU',
     end: 7,
     reponse: {
       diagonalForte: 2,
@@ -24,7 +24,7 @@ export const VideosExamFeminino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=8Ndt-xO4HPM&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=3',
+    id: '8Ndt-xO4HPM',
     end: 8,
     reponse: {
       diagonalForte: 1,
@@ -35,7 +35,7 @@ export const VideosExamFeminino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=e0MAMD0znMg&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=4',
+    id: 'e0MAMD0znMg',
     end: 8,
     reponse: {
       diagonalForte: 1,
@@ -46,7 +46,7 @@ export const VideosExamFeminino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=LkSLdA83CrM&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=5',
+    id: 'LkSLdA83CrM',
     end: 8,
     reponse: {
       diagonalForte: 1,
@@ -57,7 +57,7 @@ export const VideosExamFeminino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=luiurZdemi8&list=PLMWefn24zThw_xoGkjmI25h0J9BAdho8N&index=6',
+    id: 'luiurZdemi8',
     end: 8,
     reponse: {
       diagonalForte: 1,

@@ -6,7 +6,6 @@ import { Game } from './components/game/Game';
 import { Result } from './components/result/result';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { VideoService } from '../../../utils';
-import dispatch from '../../../data/store/reducer/dispatch';
 
 const Exam: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
   const [status, setStatus] = useState('intro');
@@ -18,11 +17,7 @@ const Exam: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
   useEffect(() => {
     const gender =
       state.user?.gender === 'masculino' ? 'masculino' : 'feminino';
-    const playlist = VideoService.getPlaylist(6, gender);
-    dispatch.sendChangeState({
-      playlist,
-    });
-    dispatch.clearAnswer();
+    VideoService.getPlaylist(3, gender);
   }, []);
 
   return (

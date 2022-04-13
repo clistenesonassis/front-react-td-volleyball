@@ -1,57 +1,56 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Page } from './styles';
-import { answerService } from '../../../../../service';
 import { CalcResult } from '../../../../../utils/CalcResult';
-import { VideoService, isMobile } from '../../../../../utils';
-
-import {
-  ChangeState,
-  ResetImpl,
-} from '../../../../../data/store/reducer/actions';
+import { VideoService } from '../../../../../utils';
 
 import { Card } from '../../../../components/card';
 import { iReducer } from '../../../../../domain/interfaces/redux/reducer';
 import { makeRemoteAnswer } from '../../../../../main/factories/usecases/UserFactory';
+import { Rater } from '../../../../components/rater';
+import dispatch from '../../../../../data/store/reducer/dispatch';
 
 export const Result: React.FC<{ history: any }> = ({
   history,
 }): JSX.Element => {
-  const videos = answerService.answers();
-  const playlist = VideoService.get();
-
-  const result = new CalcResult(playlist, videos);
-  const dispatch = useDispatch();
-
   const state: iReducer = useSelector(
     (reducer: { app: iReducer }) => reducer.app,
   );
 
+  const playlist = VideoService.get();
+
+  console.log('playlist: ', playlist);
+
+  const result = new CalcResult(playlist, state.answers || []);
+
   useEffect(() => {
-    const { user } = state;
+    const { user, answers } = state;
 
-    console.log('sending data....');
-    console.log('user data: ', state.user);
-    console.log('answers: ', answerService.answers());
+    if (false) {
+      console.log('sending data....');
+      console.log('user data: ', state.user);
+      console.log('answers: ', answers);
 
-    makeRemoteAnswer()
-      .create({
-        owner: user?.email || '',
-        answer: answerService.answers(),
-      })
-      .then(e => {
-        console.log('firebase response: ', e);
-      })
-      .catch(e => console.log('response error: ', e));
+      makeRemoteAnswer()
+        .create({
+          owner: user?.email || '',
+          answer: answers || [],
+        })
+        .then(e => {
+          console.log('firebase response: ', e);
+        })
+        .catch(e => console.log('response error: ', e));
+    }
   }, []);
 
   const finish = () => {
-    dispatch(ResetImpl());
+    dispatch.reset();
     history.push('/');
   };
 
   return (
     <Page>
+      <Rater />
       <div className="container">
         <div className="result">
           <Card

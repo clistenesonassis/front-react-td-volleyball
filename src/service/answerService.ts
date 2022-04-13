@@ -1,47 +1,49 @@
-import { VideoAnswer } from '../domain/models';
+// import { VideoAnswer } from '../domain/models';
 
-class ResponseImpl {
-  private static instance: ResponseImpl;
+// class ResponseImpl {
+//   private static instance: ResponseImpl;
 
-  private response: VideoAnswer[];
+//   private response: VideoAnswer[];
 
-  private constructor() {
-    this.response = [];
-  }
+//   private constructor() {
+//     this.response = [];
+//   }
 
-  public static getInstance(): ResponseImpl {
-    if (!ResponseImpl.instance) {
-      ResponseImpl.instance = new ResponseImpl();
-    }
+//   public static getInstance(): ResponseImpl {
+//     if (!ResponseImpl.instance) {
+//       ResponseImpl.instance = new ResponseImpl();
+//     }
 
-    return ResponseImpl.instance;
-  }
+//     return ResponseImpl.instance;
+//   }
 
-  public clearVotes(): void {
-    this.response = [];
-  }
+//   public clearVotes(): void {
+//     this.response = [];
+//   }
 
-  public votar(params: VideoAnswer): boolean {
-    let already = false;
-    this.response.forEach(item => {
-      if (item.video === params.video) already = true;
-    });
+//   public votar(params: VideoAnswer): boolean {
+//     let already = false;
+//     this.response.forEach(item => {
+//       if (item.video === params.video) already = true;
+//     });
 
-    if (already) {
-      console.log(
-        'não foi possível realizar a votação, pois o mesmo já existe.',
-      );
-      return false;
-    }
+//     if (already) {
+//       console.log(
+//         'não foi possível realizar a votação, pois o mesmo já existe.',
+//       );
+//       return false;
+//     }
 
-    this.response.push(params);
-    console.log('respostas: ', this.answers());
-    return true;
-  }
+//     this.response.push(params);
+//     console.log('respostas: ', this.answers());
+//     return true;
+//   }
 
-  public answers(): VideoAnswer[] {
-    return this.response;
-  }
-}
+//   public answers(): VideoAnswer[] {
+//     return this.response;
+//   }
+// }
 
-export default ResponseImpl.getInstance();
+// export default ResponseImpl.getInstance();
+
+export const x = 10;

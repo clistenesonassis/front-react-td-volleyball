@@ -40,13 +40,31 @@ const reducer = (state = initialState, action: ReducerActions): iReducer => {
       return { ...state, ...action.payload };
     case ReducerTypes.setPlaylist:
       return { ...state, playlist: action.payload, end: false };
+    case ReducerTypes.startGame:
+      return {
+        ...state,
+        options: false,
+        counterdown: true,
+        video: false,
+        answers: [],
+      };
+    case ReducerTypes.startVideo:
+      return { ...state, options: false, video: true, counterdown: false };
+    case ReducerTypes.awaitAnswer:
+      return { ...state, options: true, counterdown: false, video: false };
     case ReducerTypes.answer: {
-      state.playlist.shift();
+      const video = state.playlist.shift();
+      if (!video?.id) return state;
+      if (state.answers.find(answer => answer.videoId === video?.id)) {
+        return state;
+      }
+
       return {
         ...state,
         answers: [...state.answers, action.payload],
         options: false,
         counterdown: true,
+        video: false,
         end: state.playlist.length === 0,
       };
     }

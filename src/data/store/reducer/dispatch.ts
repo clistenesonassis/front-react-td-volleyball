@@ -9,6 +9,9 @@ import {
   ClearAnswer,
   Playlist,
   ReducerActions,
+  ResetImpl,
+  StartGameImpl,
+  StartVideoImpl,
 } from './actions';
 
 import store from '../index';
@@ -19,11 +22,17 @@ class Dispatch {
 
   public Playlist = (params: Videos[]) => this.dispatch(Playlist(params));
 
+  public StartGame = () => this.dispatch(StartGameImpl());
+
+  public StartVideo = () => this.dispatch(StartVideoImpl());
+
   public AwaitAnswer = () => this.dispatch(AwaitAnswerImpl());
 
   public Answer = (params: ReducerAnswers) => this.dispatch(Answer(params));
 
   public clearAnswer = () => this.dispatch(ClearAnswer());
+
+  public reset = () => this.dispatch(ResetImpl());
 
   public sendChangeState = (params: iReducer) =>
     this.dispatch(ChangeState(params));

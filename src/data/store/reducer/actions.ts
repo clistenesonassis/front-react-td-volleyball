@@ -16,6 +16,14 @@ interface SetPlaylist extends Action {
   payload: Videos[];
 }
 
+interface StartGame extends Action {
+  type: ReducerTypes.startGame;
+}
+
+interface StartVideo extends Action {
+  type: ReducerTypes.startVideo;
+}
+
 interface AwaitAnswer extends Action {
   type: ReducerTypes.awaitAnswer;
 }
@@ -43,6 +51,14 @@ export const Playlist = (params: Videos[]): SetPlaylist => ({
   payload: params,
 });
 
+export const StartGameImpl = (): StartGame => ({
+  type: ReducerTypes.startGame,
+});
+
+export const StartVideoImpl = (): StartVideo => ({
+  type: ReducerTypes.startVideo,
+});
+
 export const AwaitAnswerImpl = (): AwaitAnswer => ({
   type: ReducerTypes.awaitAnswer,
 });
@@ -66,4 +82,6 @@ export type ReducerActions =
   | Reset
   | ClearAnswers
   | SetPlaylist
-  | AwaitAnswer;
+  | AwaitAnswer
+  | StartGame
+  | StartVideo;

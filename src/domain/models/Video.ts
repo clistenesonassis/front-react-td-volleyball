@@ -1,11 +1,11 @@
 export interface Video {
-  src: string;
+  id: string;
   end: number;
   reponse: videoOptions;
 }
 
 export interface Videos {
-  src: string;
+  id: string;
   end: number;
   reponse: {
     [key: string]: number;

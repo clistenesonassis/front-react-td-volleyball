@@ -1,3 +1,4 @@
+import dispatch from '../data/store/reducer/dispatch';
 import { Videos } from '../domain/models';
 import {
   VideosExamFeminino,
@@ -53,6 +54,8 @@ class PlaylistData {
       count -= 1;
     }
 
+    dispatch.Playlist(new Array(...this.playlist));
+
     return this.playlist;
   }
 
@@ -78,6 +81,8 @@ class PlaylistData {
       this.playlist.push(...video);
       count -= 1;
     }
+
+    dispatch.Playlist(new Array(...this.playlist));
 
     return this.playlist;
   }

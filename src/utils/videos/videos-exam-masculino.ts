@@ -2,7 +2,7 @@ import { Videos } from '../../domain/models';
 
 export const VideosExamMasculino: Videos[] = [
   {
-    src: 'https://www.youtube.com/watch?v=u7J3akniR0c&list=PLMWefn24zThzureHVd9zSb2ghKyxBEL4y&index=1',
+    id: 'u7J3akniR0c',
     end: 12,
     reponse: {
       diagonalForte: 0,
@@ -13,7 +13,7 @@ export const VideosExamMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=bCQRUT5ZFHI&list=PLMWefn24zThzureHVd9zSb2ghKyxBEL4y&index=2',
+    id: 'bCQRUT5ZFHI',
     end: 12,
     reponse: {
       diagonalForte: 2,
@@ -24,7 +24,7 @@ export const VideosExamMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=lX_nm6xmH6E&list=PLMWefn24zThzureHVd9zSb2ghKyxBEL4y&index=3',
+    id: 'lX_nm6xmH6E',
     end: 11,
     reponse: {
       diagonalForte: 1,
@@ -35,7 +35,7 @@ export const VideosExamMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=fNEl8GaqFdc&list=PLMWefn24zThzureHVd9zSb2ghKyxBEL4y&index=4',
+    id: 'fNEl8GaqFdc',
     end: 11,
     reponse: {
       diagonalForte: 1,
@@ -46,7 +46,7 @@ export const VideosExamMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=6pDXwZ-7igU&list=PLMWefn24zThzureHVd9zSb2ghKyxBEL4y&index=5',
+    id: '6pDXwZ-7igU',
     end: 14,
     reponse: {
       diagonalForte: 1,
@@ -57,7 +57,7 @@ export const VideosExamMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=2hSGA0-r0qU&list=PLMWefn24zThzureHVd9zSb2ghKyxBEL4y&index=6',
+    id: '2hSGA0-r0qU',
     end: 11,
     reponse: {
       diagonalForte: 1,

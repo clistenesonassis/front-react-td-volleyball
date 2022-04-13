@@ -2,9 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Page } from './styles';
-import { answerService } from '../../../service';
 import { CalcResult } from '../../../utils/CalcResult';
-import { VideoService } from '../../../utils';
 
 import { ChangeState } from '../../../data/store/reducer/actions';
 
@@ -19,13 +17,11 @@ export interface iProps {
 type Props = iProps & RouteComponentProps;
 
 const Result: React.FC<Props> = ({ btnAction, btnContent }): JSX.Element => {
-  const videos = answerService.answers();
-
   const state: iReducer = useSelector(
     (reducer: { app: iReducer }) => reducer.app,
   );
 
-  const result = new CalcResult(state.playlist!, videos);
+  const result = new CalcResult(state.playlist!, state.answers || []);
   const dispatch = useDispatch();
 
   const finish = () => {

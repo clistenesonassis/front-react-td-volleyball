@@ -1,37 +1,67 @@
 import { Box, Button, Modal, TextField, Typography } from '@material-ui/core';
+import { LoadingButton } from '@mui/lab';
 import { Rating } from '@mui/material';
 import React from 'react';
-import { Container } from './styles/RaterStyles';
+import { useSelector } from 'react-redux';
+import { iReducer } from '../../../domain/interfaces/redux/reducer';
+import { makeRemoteAnswer } from '../../../main/factories/usecases/UserFactory';
+import { Container } from './Rater.styles';
 
 const style = {
   position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px',
-  boxShadow: 24,
-  p: 4,
+  width: '100%',
+  height: '100%',
 };
 
 export const Rater: React.FC = (): JSX.Element => {
   const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
+  const [loading, setLoading] = React.useState(false);
   const handleClose = () => setOpen(false);
-  const [value, setValue] = React.useState<any>(2);
+  const [value, setValue] = React.useState<any>(0);
+  const [description, setDescription] = React.useState<any>('');
+
+  const state: iReducer = useSelector(
+    (reducer: { app: iReducer }) => reducer.app,
+  );
+
+  const submit = () => {
+    const { user, answers } = state;
+
+    setLoading(true);
+
+    makeRemoteAnswer()
+      .create({
+        owner: user?.email || '',
+        answer: answers || [],
+        avaliacao: value,
+        avaliacaoDescription: description,
+      })
+      .then(e => {
+        setLoading(false);
+        handleClose();
+        console.log('firebase response: ', e);
+      })
+      .catch(e => {
+        setLoading(false);
+        alert('falha ao enviar dados para o servidor. tente novamente');
+      });
+  };
 
   return (
-    <Container>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
+    <Modal
+      open={open}
+      onClose={(_, reason) => {
+        if (reason !== 'backdropClick') {
+          handleClose();
+        }
+      }}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      disableAutoFocus
+      disableEscapeKeyDown
+    >
+      <Box sx={style}>
+        <Container>
           <Typography id="modal_title" variant="h6" component="h2">
             Deixe seu comentário
           </Typography>
@@ -42,6 +72,7 @@ export const Rater: React.FC = (): JSX.Element => {
           <Rating
             name="simple-controlled"
             value={value}
+            size="large"
             onChange={(event, newValue) => {
               setValue(newValue);
             }}
@@ -52,11 +83,28 @@ export const Rater: React.FC = (): JSX.Element => {
             label="Deixe um comentário"
             multiline
             rows={4}
-            defaultValue="Default Value"
+            defaultValue=""
+            value={description}
+            onChange={e => setDescription(e.target.value)}
             variant="standard"
+            required={false}
           />
-        </Box>
-      </Modal>
-    </Container>
+
+          <div className="footer">
+            <LoadingButton
+              loading={loading}
+              variant="contained"
+              type="submit"
+              onClick={submit}
+              size="large"
+              className="btn-submit"
+              disabled={value === 0}
+            >
+              Enviar
+            </LoadingButton>
+          </div>
+        </Container>
+      </Box>
+    </Modal>
   );
 };

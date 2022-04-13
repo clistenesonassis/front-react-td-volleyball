@@ -2,7 +2,7 @@ import { Videos } from '../../domain/models';
 
 export const VideosTestMasculino: Videos[] = [
   {
-    src: 'https://www.youtube.com/watch?v=fjcbaEfvtcQ&list=PLMWefn24zThweuCtB2XdBuN701VtiTqgk&index=1',
+    id: 'fjcbaEfvtcQ',
     end: 7,
     reponse: {
       diagonalForte: 0,
@@ -13,7 +13,7 @@ export const VideosTestMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=B2w3DSR_3eQ&list=PLMWefn24zThweuCtB2XdBuN701VtiTqgk&index=2',
+    id: 'B2w3DSR_3eQ',
     end: 10,
     reponse: {
       diagonalForte: 2,
@@ -24,7 +24,7 @@ export const VideosTestMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=w-gZH1Zo1G8&list=PLMWefn24zThweuCtB2XdBuN701VtiTqgk&index=3',
+    id: 'w-gZH1Zo1G8',
     end: 11,
     reponse: {
       diagonalForte: 1,
@@ -35,7 +35,7 @@ export const VideosTestMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=fjcbaEfvtcQ&list=PLMWefn24zThweuCtB2XdBuN701VtiTqgk&index=1',
+    id: 'fjcbaEfvtcQ',
     end: 7,
     reponse: {
       diagonalForte: 0,
@@ -46,7 +46,7 @@ export const VideosTestMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=B2w3DSR_3eQ&list=PLMWefn24zThweuCtB2XdBuN701VtiTqgk&index=2',
+    id: 'B2w3DSR_3eQ',
     end: 10,
     reponse: {
       diagonalForte: 2,
@@ -57,7 +57,7 @@ export const VideosTestMasculino: Videos[] = [
     },
   },
   {
-    src: 'https://www.youtube.com/watch?v=w-gZH1Zo1G8&list=PLMWefn24zThweuCtB2XdBuN701VtiTqgk&index=3',
+    id: 'w-gZH1Zo1G8',
     end: 11,
     reponse: {
       diagonalForte: 1,

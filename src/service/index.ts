@@ -1,1 +1,1 @@
-export { default as answerService } from './answerService';
+export * from './answerService';

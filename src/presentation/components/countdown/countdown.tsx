@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dispatch from '../../../data/store/reducer/dispatch';
+import { VideoService } from '../../../utils';
 
 import { Container } from './countdown.styles';
 
@@ -12,12 +13,7 @@ export const Countdown: React.FC = (): JSX.Element => {
     const counter = (timer: number) => {
       setCurrentTime(timer);
 
-      if (timer === 0)
-        dispatch.sendChangeState({
-          options: false,
-          video: true,
-          counterdown: false,
-        });
+      if (timer === 0) dispatch.StartVideo();
       else
         timeout = setTimeout(() => {
           counter(timer - 1);
@@ -28,6 +24,9 @@ export const Countdown: React.FC = (): JSX.Element => {
 
     return () => {
       clearTimeout(timeout);
+      const playlist = VideoService.get();
+
+      console.log('playlist: ', playlist);
     };
   }, []);
 
