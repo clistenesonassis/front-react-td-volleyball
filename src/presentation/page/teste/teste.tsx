@@ -37,17 +37,32 @@ const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
 
   const GetVideo = () =>
     makeRemoteVideo()
-      .get('training', 'feminino')
+      .get('training', 'masculino')
       .then(e => {
         e.body.docs.forEach((res: any) => {
           console.log('videos: ', res.data());
         });
       });
 
+  const SetVideo = () =>
+    makeRemoteVideo()
+      .set('valid', 'masculino', {
+        id: 'testando_id',
+        end: 10,
+        reponse: {
+          diagonalForte: 2,
+          diagonalColocado: 1,
+          corredorForte: 0,
+          corredorColocado: 3,
+          explorandoBloqueio: 4,
+        },
+      })
+      .then(e => console.log(e.body));
+
   return (
     <>
       <Container>
-        <Rater />
+        {/* <Rater /> */}
         <h1>testando aplicação</h1>
         <button type="button" onClick={SendData}>
           Send !!
@@ -59,6 +74,10 @@ const Teste: React.FC<RouteComponentProps> = (props): JSX.Element => {
 
         <button type="button" onClick={GetVideo}>
           Obter video
+        </button>
+
+        <button type="button" onClick={SetVideo}>
+          Salvar video
         </button>
       </Container>
     </>

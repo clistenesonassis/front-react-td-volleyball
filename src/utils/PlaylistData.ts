@@ -41,10 +41,14 @@ class PlaylistData {
         : new Array(...VideosExamMasculino);
     this.playlist = [];
 
-    // se a quantidade de videos solicitado for maior que a quantidade total, então retorna um error.
-    if (amount > data.length) return [];
+    let count = 0;
 
-    let count = amount;
+    // se a quantidade de videos solicitado for maior que a quantidade total, então retorna um error.
+    if (amount > data.length) {
+      count = data.length;
+    } else {
+      count = amount;
+    }
 
     while (count) {
       const random = Math.floor(Math.random() * count);

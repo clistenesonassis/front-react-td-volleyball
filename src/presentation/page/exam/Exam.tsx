@@ -17,7 +17,7 @@ const Exam: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
   useEffect(() => {
     const gender =
       state.user?.gender === 'masculino' ? 'masculino' : 'feminino';
-    VideoService.getPlaylist(3, gender);
+    VideoService.getPlaylist(100, gender);
   }, []);
 
   return (
