@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="programming-guide" width="200px" src="https://github.com/clistenesonassis/front-react-td-volleyball/blob/master/.github/assets/volley.gif">
+  <img alt="programming-guide" width="200px" src="https://github.com/clistenesonassis/front-react-td-volleyball/blob/main/.github/assets/volley.gif">
 </p>
 
 <h1 align="center">
