@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import ReactPlayer from 'react-player';
-import { useDispatch, useSelector } from 'react-redux';
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import { useSelector } from 'react-redux';
+import dispatch from '../../../data/store/reducer/dispatch';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
-import { iVideo } from '../../../utils/Videos';
-
-interface ownProps {
-  playlist: iVideo[];
-  playing?: boolean;
-  onProgress?: () => any;
-}
+import { createVideoURl } from '../../../utils/createVideoUrl';
+import { Container } from './player.styles';
 
 interface videoProgress {
   played: number;
@@ -18,34 +14,42 @@ interface videoProgress {
   loadedSeconds: number;
 }
 
-const Player: React.FC<ownProps> = ({ playlist }): JSX.Element => {
-  const [running, setRunning] = useState(true);
-  const dispatch = useDispatch();
+const Player: React.FC = (): JSX.Element => {
   const state: iReducer = useSelector(
     (reducer: { app: iReducer }) => reducer.app,
   );
 
+  const playlist = state.playlist ? state.playlist : [];
+  let isAllowed: boolean;
+
+  useEffect(() => {
+    isAllowed = true;
+  }, []);
+
   const analyzeTime = (e: videoProgress, end: number): void => {
     const currentTime = Math.trunc(e.playedSeconds);
-    if (currentTime > end) {
-      setRunning(false);
-      dispatch(AnswerImpl({ options: true, counterdown: false }));
+    if (currentTime > end && isAllowed) {
+      isAllowed = false;
+      dispatch.AwaitAnswer();
     }
   };
 
   return (
-    <ReactPlayer
-      url={playlist[state.currentVideo!].src}
-      height="700px"
-      width="100%"
-      id="video"
-      playing={running}
-      controls={false}
-      progressInterval={1000}
-      onProgress={(e: videoProgress) => {
-        analyzeTime(e, playlist[state.currentVideo!].end);
-      }}
-    />
+    <Container>
+      <ReactPlayer
+        url={createVideoURl(playlist[0]?.id)}
+        height="100%"
+        width="100%"
+        id="player"
+        playing={state.video}
+        stopOnUnmount
+        controls={false}
+        progressInterval={200}
+        onProgress={(e: videoProgress) => {
+          analyzeTime(e, playlist[0]?.end);
+        }}
+      />
+    </Container>
   );
 };
 

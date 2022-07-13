@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type LocalstoreRequest = {
   key?: string;
   value?: string;

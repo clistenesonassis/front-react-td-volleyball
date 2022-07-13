@@ -1,14 +1,20 @@
-import { Videos, iVideo } from './Videos';
+import dispatch from '../data/store/reducer/dispatch';
+import { Videos } from '../domain/models';
+import {
+  VideosExamFeminino,
+  VideosExamMasculino,
+  VideosTestFeminino,
+  VideosTestMasculino,
+} from './videos/Videos';
+
+type Gender = 'feminino' | 'masculino';
 
 class PlaylistData {
   private static instance: PlaylistData;
 
-  private data: iVideo[];
-
-  private playlist: iVideo[];
+  private playlist: Videos[];
 
   constructor() {
-    this.data = Videos;
     this.playlist = [];
   }
 
@@ -28,21 +34,59 @@ class PlaylistData {
    * Pegar uma playlist.
    * @param quantidade Quantidade de videos que a playlist deve possuir.
    */
-  public getPlaylist(amount: number): iVideo[] {
-    // se a quantidade de videos solicitado for maior que a quantidade total, então retorna um error.
-    if (amount > this.data.length) return [];
+  public getPlaylist(amount: number, gender: Gender): Videos[] {
+    const data =
+      gender === 'feminino'
+        ? new Array(...VideosExamFeminino)
+        : new Array(...VideosExamMasculino);
+    this.playlist = [];
 
-    let count = amount;
-    const dataVideo = this.data;
+    let count = 0;
+
+    // se a quantidade de videos solicitado for maior que a quantidade total, então retorna um error.
+    if (amount > data.length) {
+      count = data.length;
+    } else {
+      count = amount;
+    }
+
     while (count) {
       const random = Math.floor(Math.random() * count);
 
-      const video = dataVideo.splice(random, 1);
+      const video = data.splice(random, 1);
       this.playlist.push(...video);
       count -= 1;
     }
 
-    console.log('return aqui: ', this.playlist);
+    dispatch.Playlist(new Array(...this.playlist));
+
+    return this.playlist;
+  }
+
+  /**
+   * Pegar uma playlist.
+   * @param quantidade Quantidade de videos que a playlist deve possuir.
+   */
+  public getPlaylistTeste(amount: number, gender: Gender): Videos[] {
+    const data =
+      gender === 'feminino'
+        ? new Array(...VideosTestFeminino)
+        : new Array(...VideosTestMasculino);
+    this.playlist = [];
+
+    // se a quantidade de videos solicitado for maior que a quantidade total, então retorna um error.
+    if (amount > data.length) return [];
+
+    let count = amount;
+    while (count) {
+      const random = Math.floor(Math.random() * count);
+
+      const video = data.splice(random, 1);
+      this.playlist.push(...video);
+      count -= 1;
+    }
+
+    dispatch.Playlist(new Array(...this.playlist));
 
     return this.playlist;
   }

@@ -1,36 +1,34 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Page } from './styles';
-import { Player } from '../../components/player';
-import { Choices } from '../../components/choices';
-import { Countdown } from '../../components/countdown/countdown';
+import { useSelector } from 'react-redux';
+import { Intro } from './components/intro/Intro';
+import { Game } from './components/game/Game';
+import Result from './components/result/result';
 import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { VideoService } from '../../../utils';
 
-const playlist = VideoService.getPlaylist(3);
+const Playground: React.FC<RouteComponentProps> = ({
+  history,
+}): JSX.Element => {
+  const [status, setStatus] = useState('intro');
 
-const Game: React.FC<RouteComponentProps> = ({ history }): JSX.Element => {
   const state: iReducer = useSelector(
     (reducer: { app: iReducer }) => reducer.app,
   );
 
   useEffect(() => {
-    if (state.currentVideo === playlist.length) {
-      history.push('/result');
-    }
-  }, [state.currentVideo]);
+    const gender =
+      state.user?.gender === 'masculino' ? 'masculino' : 'feminino';
+    VideoService.getPlaylistTeste(3, gender);
+  }, []);
 
   return (
-    <Page>
-      <div className="container">
-        {state.video && <Player playlist={playlist} />}
-        {state.options && <Choices />}
-      </div>
-      {state.counterdown && <Countdown />}
-    </Page>
+    <>
+      {status === 'intro' && <Intro start={() => setStatus('game')} />}
+      {status === 'game' && <Game end={() => setStatus('end')} />}
+      {status === 'end' && <Result history={history} />}
+    </>
   );
 };
 
-export default Game;
+export default Playground;

@@ -1,14 +1,15 @@
-import { iResponse } from '../service';
-import { iVideo } from './Videos';
+import { ReducerAnswers } from '../domain/interfaces/redux/reducer';
+import { Videos } from '../domain/models';
 
 export class CalcResult {
-  private result: iResponse[];
+  private result: ReducerAnswers[];
 
-  private videos: iVideo[];
+  private videos: Videos[];
 
-  constructor(videos: iVideo[], result: iResponse[]) {
+  constructor(videos: Videos[], result: ReducerAnswers[]) {
     this.result = result;
     this.videos = videos;
+    console.log(result, videos);
   }
 
   public accuracy(): string {
@@ -63,4 +64,24 @@ export class CalcResult {
       this.result.length
     ).toFixed(2);
   }
+
+  public averageResponseTime = (): string => {
+    let timeToResponse = 0;
+
+    this.result.forEach(e => {
+      timeToResponse += e.time;
+    });
+
+    return (timeToResponse / this.result.length).toFixed(0);
+  };
+
+  public totalTime = (): string => {
+    let timeToResponse = 0;
+
+    this.result.forEach(e => {
+      timeToResponse += e.time;
+    });
+
+    return (timeToResponse / 1000).toFixed(0);
+  };
 }

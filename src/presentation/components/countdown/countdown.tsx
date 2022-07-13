@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AnswerImpl } from '../../../data/store/reducer/actions';
+import dispatch from '../../../data/store/reducer/dispatch';
+import { VideoService } from '../../../utils';
 
-import { Container } from './styles/countdown';
+import { Container } from './countdown.styles';
 
 export const Countdown: React.FC = (): JSX.Element => {
   const [currentTime, setCurrentTime] = useState(3);
-  const dispatch = useDispatch();
 
   useEffect(() => {
+    let timeout: number;
+
+    const counter = (timer: number) => {
+      setCurrentTime(timer);
+
+      if (timer === 0) dispatch.StartVideo();
+      else
+        timeout = setTimeout(() => {
+          counter(timer - 1);
+        }, 1000);
+    };
+
     counter(3);
+
+    return () => {
+      clearTimeout(timeout);
+      const playlist = VideoService.get();
+
+      console.log('playlist: ', playlist);
+    };
   }, []);
-
-  const counter = (timer: number) => {
-    setCurrentTime(timer);
-
-    if (timer === 0)
-      dispatch(AnswerImpl({ options: false, video: true, counterdown: false }));
-    else
-      setTimeout(() => {
-        counter(timer - 1);
-      }, 1000);
-  };
 
   return <Container>{currentTime}</Container>;
 };
