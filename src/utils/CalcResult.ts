@@ -69,7 +69,7 @@ export class CalcResult {
     let timeToResponse = 0;
 
     this.result.forEach(e => {
-      timeToResponse += e.time;
+      timeToResponse += e.duration;
     });
 
     return (timeToResponse / this.result.length).toFixed(0);
@@ -79,7 +79,7 @@ export class CalcResult {
     let timeToResponse = 0;
 
     this.result.forEach(e => {
-      timeToResponse += e.time;
+      timeToResponse += e.duration;
     });
 
     return (timeToResponse / 1000).toFixed(0);

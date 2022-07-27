@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import dispatch from '../../../data/store/reducer/dispatch';
-import { VideoService } from '../../../utils';
+import dispatch from 'data/store/reducer/dispatch';
+import { VideoService } from 'utils';
 
 import { Container } from './countdown.styles';
 
@@ -8,7 +8,7 @@ export const Countdown: React.FC = (): JSX.Element => {
   const [currentTime, setCurrentTime] = useState(3);
 
   useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
 
     const counter = (timer: number) => {
       setCurrentTime(timer);
@@ -24,9 +24,7 @@ export const Countdown: React.FC = (): JSX.Element => {
 
     return () => {
       clearTimeout(timeout);
-      const playlist = VideoService.get();
-
-      console.log('playlist: ', playlist);
+      VideoService.get();
     };
   }, []);
 

@@ -61,7 +61,7 @@ const reducer = (state = initialState, action: ReducerActions): iReducer => {
 
       return {
         ...state,
-        answers: [...state.answers, action.payload],
+        answers: [...state.answers],
         options: false,
         counterdown: true,
         video: false,

@@ -28,7 +28,7 @@ export const Game: React.FC<Props> = ({ end }): JSX.Element => {
     <Page>
       <div className="container">
         {state.video ? <Player /> : <Painel />}
-        {state.options && <Choices />}
+        <Choices />
       </div>
       {state.counterdown && <Countdown />}
     </Page>

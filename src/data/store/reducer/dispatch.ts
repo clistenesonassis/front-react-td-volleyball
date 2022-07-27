@@ -1,7 +1,4 @@
-import {
-  iReducer,
-  ReducerAnswers,
-} from '../../../domain/interfaces/redux/reducer';
+import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import {
   Answer,
   AwaitAnswerImpl,
@@ -28,7 +25,7 @@ class Dispatch {
 
   public AwaitAnswer = () => this.dispatch(AwaitAnswerImpl());
 
-  public Answer = (params: ReducerAnswers) => this.dispatch(Answer(params));
+  public Answer = (answer: string) => this.dispatch(Answer(answer));
 
   public clearAnswer = () => this.dispatch(ClearAnswer());
 

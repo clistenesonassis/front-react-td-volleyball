@@ -1,17 +1,9 @@
 import React from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { Container } from './home.styles';
-import { line1, volei } from '../../base/assets/image';
+import { volei } from '../../base/assets/image';
 
-export const HomeComponent: React.FC<RouteComponentProps> = (
-  props,
-): JSX.Element => {
-  const onNext = (e: any) => {
-    e.preventDefault();
-    console.log('next function >');
-    props.history.push('/register');
-  };
-
+export const HomeComponent: React.FC<RouteComponentProps> = (): JSX.Element => {
   return (
     <Container>
       <div className="home container">

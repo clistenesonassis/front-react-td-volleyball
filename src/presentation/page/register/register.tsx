@@ -173,7 +173,6 @@ export const RegisterComponent: React.FC<Props> = ({
         >
           {({ values, errors, handleSubmit, handleChange, handleBlur }) => (
             <Form className="container" onSubmit={handleSubmit}>
-              {console.log(values, errors)}
               <Group quant={['1fr', '0.5fr']}>
                 <TextField
                   id="standard-basic"

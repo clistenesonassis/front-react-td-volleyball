@@ -19,8 +19,6 @@ export const Result: React.FC<{ history: any }> = ({
 
   const playlist = VideoService.get();
 
-  console.log('playlist: ', playlist);
-
   const result = new CalcResult(playlist, state.answers || []);
 
   useEffect(() => {

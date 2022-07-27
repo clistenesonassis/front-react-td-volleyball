@@ -1,8 +1,5 @@
 import { Action } from 'redux';
-import {
-  iReducer,
-  ReducerAnswers,
-} from '../../../domain/interfaces/redux/reducer';
+import { iReducer } from '../../../domain/interfaces/redux/reducer';
 import { Videos } from '../../../domain/models';
 import { ReducerTypes } from './types';
 
@@ -30,7 +27,7 @@ interface AwaitAnswer extends Action {
 
 interface Answer extends Action {
   type: ReducerTypes.answer;
-  payload: ReducerAnswers;
+  payload: { answer: string };
 }
 
 interface ClearAnswers extends Action {
@@ -63,9 +60,9 @@ export const AwaitAnswerImpl = (): AwaitAnswer => ({
   type: ReducerTypes.awaitAnswer,
 });
 
-export const Answer = (params: ReducerAnswers): Answer => ({
+export const Answer = (answer: string): Answer => ({
   type: ReducerTypes.answer,
-  payload: params,
+  payload: { answer },
 });
 
 export const ClearAnswer = (): ClearAnswers => ({
